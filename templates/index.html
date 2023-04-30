@@ -1,0 +1,178 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <title>PII Detection</title>
+  </head>
+  <body class="bd-layout">
+    <aside class="bd-sidebar p-4 text-white bg-dark">
+      <nav>
+        <h2>PII Detection</h2>
+      </nav>
+    </aside>
+    <main class="bd-main">
+      <header class="navbar navbar-expand-md navbar-dark bd-navbar">
+        <nav class="flex-wrap flex-md-nowrap">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="text-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#text"
+                type="button"
+                role="tab"
+              >
+                <strong>PII Detection in text</strong>
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="file-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#file"
+                type="button"
+                role="tab"
+              >
+              <strong>PII Detection with files</strong>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="text" role="tabpanel">
+          <form
+            method="post"
+            action="/"
+            enctype="multipart/form-data"
+            class="needs-validation"
+            novalidate
+          >
+            <div class="mb-5">
+              <label for="pii-text" class="form-label"
+                >Enter the text below for PII detection:</label
+              >
+              <textarea
+                class="form-control form-control-sm"
+                id="pii-text"
+                name="pii-text"
+                rows="6"
+                required
+              >
+{{ request.form['pii-text'] }}</textarea
+              >
+              <div class="invalid-feedback">
+                Please paste the text for PII detection
+              </div>
+            </div>
+            <div class="mb-3 json-example">
+              <label for="json-file" class="form-label">Upload a JSON file with your examples as shown below for customization: <em class="text-muted">(Optional)</em>
+              </label>
+              <input
+                class="form-control form-control-sm mb-3"
+                type="file"
+                id="json-file"
+                name="json-file"
+                accept=".json"
+              />
+              <div class="invalid-feedback">Please select a JSON file</div>
+              <small>Example json:
+              <pre><code>[ 
+    { 
+        "text": "Tom Smith, a 28-year-old man from California, had his wallet stolen while shopping at the mall. His driver's license, credit cards, and social security card were inside. He immediately reported the theft to the police and his bank.",
+        "labels": "pii"
+    },
+    {
+        "text": "The sun was shining bright as Mary walked through the park. She loved the feeling of the warm sun on her skin and the smell of fresh cut grass. She decided to lay down on the grass and take a nap.",
+        "labels": "non-pii"
+    } 
+ ]</code></pre></small>
+            </div>
+            <button type="submit" class="btn btn-success" value="Submit">
+              Detect PII
+            </button>
+          </form>
+
+          {% if result == 'pii' %}
+          <div class="alert alert-danger result" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            The text contains PII information
+          </div>
+          {% elif result == 'non-pii' %}
+          <div class="alert alert-success result" role="alert">
+            <i class="bi bi-check-circle-fill"></i>
+            The text doesn't contain PII information
+          </div>
+          {% endif %}
+        </div>
+        <div class="tab-pane fade" id="file" role="tabpanel">
+          <form
+            method="post"
+            action="backend-url"
+            class="needs-validation"
+            enctype="multipart/form-data"
+            novalidate
+          >
+            <div class="mb-3">
+              <label for="pii-file" class="form-label"
+                >Please upload file for PII Detection</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                id="pii-file"
+                name="pii-file"
+                required
+              />
+              <div class="invalid-feedback">
+                Please upload a file for PII detection.
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">Detect PII</button>
+          </form>
+
+          <div id="result"></div>
+        </div>
+      </div>
+    </main>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script>
+        (function () {
+          'use strict';
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.querySelectorAll('.needs-validation');
+          // Loop over them and prevent submission
+          Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        })();
+    </script>
+  </body>
+</html>

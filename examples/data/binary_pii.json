@@ -1,0 +1,117 @@
+[
+    {
+        "text": "Tom Smith, a 28-year-old man from California, had his wallet stolen while shopping at the mall. His driver's license, credit cards, and social security card were inside. He immediately reported the theft to the police and his bank.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "The sun was shining bright as Mary walked through the park. She loved the feeling of the warm sun on her skin and the smell of fresh cut grass. She decided to lay down on the grass and take a nap.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Samantha Jones, a 35-year-old woman from New York, received a phone call from someone claiming to be from her bank. They asked for her name, address, and social security number to verify her account. She became suspicious and hung up, then reported the call to her bank.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Susan enjoyed spending her weekends at the farmers' market. She loved the fresh produce and the sense of community that came with supporting local farmers. She often brought a friend with her and they would make a day of it, trying new foods and browsing the different vendors.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Mark Davis, a 42-year-old man from Texas, applied for a job online. He provided his name, address, phone number, and resume to the company. Unfortunately, the company turned out to be a scam and stole his identity.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "John was an avid cyclist and would often ride his bike for miles along the countryside. He loved the feeling of the wind in his hair and the sense of freedom that came with cycling.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Ashley Lee, a 25-year-old woman from Florida, went to the doctor for a medical issue. She provided her name, address, and medical history to the healthcare provider. Later, she discovered that her medical records had been compromised and her information was being sold on the dark web.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Daniel Kim, a 50-year-old man from Ohio, received a letter from the IRS stating that someone had filed a tax return using his social security number. He had to spend months sorting out the issue and proving his identity to the government.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Emily Brown, a 30-year-old woman from Georgia, discovered that someone had opened a credit card account in her name. She had to file a police report and dispute the charges with the credit card company to clear her name.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "James was a history buff and enjoyed visiting museums and historical sites. He found it fascinating to learn about different eras and cultures, and enjoyed the interactive exhibits that many museums offered.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Julia loved to travel and explore new places. She often planned trips months in advance, researching the best restaurants and attractions to visit. Her favorite part of traveling was experiencing new cultures and meeting new people.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Sarah was an animal lover and enjoyed going for walks in the park with her dog. She found it therapeutic to spend time in nature and loved seeing her dog's excitement when they went for walks.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Robert enjoyed spending his weekends on the golf course. He found the sport to be challenging and enjoyed the time outside in the fresh air. He often played with friends and they would make a day of it, grabbing lunch at the clubhouse after their round.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Amy enjoyed spending time with her friends and often hosted game nights at her apartment. She loved the sense of camaraderie that came with playing board games and card games with friends.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Tim was a sports fan and enjoyed watching football on Sundays. He would often invite friends over to watch the game and they would make a party of it, enjoying snacks and drinks while cheering on their favorite team.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Rachel enjoyed volunteering at the local food bank. She found it rewarding to help those in need and enjoyed the sense of community that came with working alongside other volunteers. She often recruited friends to come with her and they would make a day of it, helping out and then grabbing lunch at a nearby cafe.",
+        "labels": "non-pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "David Nguyen, a 45-year-old man from California, had his identity stolen by a hacker who accessed his online banking information. The hacker drained his bank account and used his credit cards to make fraudulent purchases.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Jessica Lee, a 35-year-old woman from Illinois, lost her phone on a crowded bus. Her phone contained sensitive information, including her email address, social media accounts, and banking apps. She immediately contacted her phone provider and changed all of her passwords.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    },
+    {
+        "text": "Melissa Garcia, a 40-year-old woman from Florida, applied for a passport but was denied because her name was on a government watchlist. She had to spend months clearing her name and proving that she was not a security threat.",
+        "labels": "pii",
+        "score": "",
+        "complexity": ""
+    }
+
+]
