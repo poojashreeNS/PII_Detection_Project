@@ -27,7 +27,11 @@
     pip install appdirs
   
     pip install jinja2
+    
+**4. Command to run the application**
 
-**4. Command to deactivate virtual env**
+    flask run
+
+**5. Command to deactivate virtual env**
 
     deactivate
