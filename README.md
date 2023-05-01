@@ -13,8 +13,6 @@
     source path_to_envfolder/bin/activate
 
 **3. Install dependencies**
-
-    Install flask
   
     pip install --upgrade pip
     
