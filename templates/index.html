@@ -30,7 +30,7 @@
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link active"
+                class="nav-link {% if active_tab=='text' %}active{% endif %}"
                 id="text-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#text"
@@ -42,7 +42,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link"
+                class="nav-link {% if active_tab=='file' %}active{% endif %}"
                 id="file-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#file"
@@ -56,7 +56,7 @@
         </nav>
       </header>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="text" role="tabpanel">
+        <div class="tab-pane fade {% if active_tab=='text' %}show active{% endif %}" id="text" role="tabpanel">
           <form
             method="post"
             action="/"
@@ -109,24 +109,24 @@
             </button>
           </form>
 
-          {% if result == 'pii' %}
+          {% if result == 'pii' and active_tab == 'text'%}
           <div class="alert alert-danger result" role="alert">
             <i class="bi bi-exclamation-triangle-fill"></i>
             The text contains PII information
           </div>
-          {% elif result == 'non-pii' %}
+          {% elif result == 'non-pii' and active_tab == 'text'%}
           <div class="alert alert-success result" role="alert">
             <i class="bi bi-check-circle-fill"></i>
             The text doesn't contain PII information
           </div>
           {% endif %}
         </div>
-        <div class="tab-pane fade" id="file" role="tabpanel">
+        <div class="tab-pane fade {% if active_tab=='file' %}show active{% endif %}" id="file" role="tabpanel">
           <form
             method="post"
-            action="backend-url"
-            class="needs-validation"
+            action="/"
             enctype="multipart/form-data"
+            class="needs-validation"
             novalidate
           >
             <div class="mb-3">
@@ -147,7 +147,17 @@
             <button type="submit" class="btn btn-success">Detect PII</button>
           </form>
 
-          <div id="result"></div>
+          {% if result == 'pii' and active_tab == 'file'%}
+          <div class="alert alert-danger result" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            The text contains PII information
+          </div>
+          {% elif result == 'non-pii' and active_tab == 'file'%}
+          <div class="alert alert-success result" role="alert">
+            <i class="bi bi-check-circle-fill"></i>
+            The text doesn't contain PII information
+          </div>
+          {% endif %}
         </div>
       </div>
     </main>
