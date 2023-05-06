@@ -42,17 +42,12 @@ nav {
   padding: 20px 10px;
 }
 
-.result{
-  width: fit-content;
+.is-empty {
+  border: 1px solid #dc3545;
 }
 
-.json-example pre {
-  white-space: pre-wrap;
-  max-width: -webkit-fill-available;
-  overflow-x: auto;
-  margin-bottom: 1rem;
-  background-color: #cfd5dc4f;
-  border-radius: 6px;
+.result{
+  width: fit-content;
 }
 
 code {
@@ -61,10 +56,6 @@ code {
   font-size: 85%;
   white-space: break-spaces;
 }
-/* 
-em {
-  color: #838b92;
-} */
 
 @media (min-width: 992px) {
   .bd-layout {

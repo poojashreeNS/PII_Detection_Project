@@ -21,7 +21,7 @@
   <body class="bd-layout">
     <aside class="bd-sidebar p-4 text-white bg-dark">
       <nav>
-        <h2>PII Detection</h2>
+        <h1>PII Detection</h1>
       </nav>
     </aside>
     <main class="bd-main">
@@ -30,99 +30,148 @@
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link {% if active_tab=='text' %}active{% endif %}"
-                id="text-tab"
+                class="nav-link {% if active_tab=='generic' %}active{% endif %}"
+                id="generic-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#text"
+                data-bs-target="#generic"
                 type="button"
                 role="tab"
               >
-                <strong>PII Detection in text</strong>
+                <h5>Generic PII Detection</h5>
               </button>
             </li>
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link {% if active_tab=='file' %}active{% endif %}"
-                id="file-tab"
+                class="nav-link {% if active_tab=='custom' %}active{% endif %}"
+                id="custom-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#file"
+                data-bs-target="#custom"
                 type="button"
                 role="tab"
               >
-              <strong>PII Detection with files</strong>
+                <h5>Customize PII Detection</h5>
               </button>
             </li>
           </ul>
         </nav>
       </header>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade {% if active_tab=='text' %}show active{% endif %}" id="text" role="tabpanel">
+        <div
+          class="tab-pane fade {% if active_tab=='generic' %}show active{% endif %}"
+          id="generic"
+          role="tabpanel"
+        >
           <form
+            id="generic-form"
             method="post"
             action="/"
             enctype="multipart/form-data"
             class="needs-validation"
             novalidate
           >
-            <div class="mb-5">
-              <label for="pii-text" class="form-label"
-                >Enter the text below for PII detection:</label
-              >
-              <textarea
-                class="form-control form-control-sm"
-                id="pii-text"
-                name="pii-text"
-                rows="6"
-                required
-              >
-{{ request.form['pii-text'] }}</textarea
-              >
-              <div class="invalid-feedback">
-                Please paste the text for PII detection
+            <div class="mb-4 accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    <strong>Detect PII in text</strong>
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse show"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    <label for="generic-text" class="form-label"
+                      >Enter the text below for PII detection</label
+                    >
+                    <textarea
+                      class="form-control form-control-sm"
+                      id="generic-text"
+                      name="generic-text"
+                      rows="6"
+                    >
+{{ request.form['generic-text'] }}</textarea
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    <strong>Detect PII in file</strong>
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    <label for="generic-file" class="form-label"
+                      >Detect PII in file
+                    </label>
+                    <input
+                      class="form-control form-control-sm mb-3"
+                      type="file"
+                      id="generic-file"
+                      name="generic-file"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="mb-3 json-example">
-              <label for="json-file" class="form-label">Upload a JSON file with your examples as shown below for customization: <em class="text-muted">(Optional)</em>
-              </label>
-              <input
-                class="form-control form-control-sm mb-3"
-                type="file"
-                id="json-file"
-                name="json-file"
-                accept=".json"
-              />
-              <div class="invalid-feedback">Please select a JSON file</div>
-              <small>Example json:
-              <pre><code>[ 
-    { 
-        "text": "Tom Smith, a 28-year-old man from California, had his wallet stolen while shopping at the mall. His driver's license, credit cards, and social security card were inside. He immediately reported the theft to the police and his bank.",
-        "labels": "pii"
-    },
-    {
-        "text": "The sun was shining bright as Mary walked through the park. She loved the feeling of the warm sun on her skin and the smell of fresh cut grass. She decided to lay down on the grass and take a nap.",
-        "labels": "non-pii"
-    } 
- ]</code></pre></small>
+            <div class="mb-3 invalid-feedback">
+              <strong
+                >Please enter text or upload a file for PII detection</strong
+              >
             </div>
-            <button type="submit" class="btn btn-success" value="Submit">
-              Detect PII
+            <button
+              id="btn1"
+              type="submit"
+              class="btn btn-success"
+              value="Submit"
+            >
+              <span
+                id="spinner"
+                class="spinner-border spinner-border-sm d-none me-2"
+              ></span
+              >Detect PII
             </button>
           </form>
 
-          {% if result == 'pii' and active_tab == 'text'%}
+          {% if result == 'pii' and active_tab == 'generic'%}
           <div class="alert alert-danger result" role="alert">
             <i class="bi bi-exclamation-triangle-fill"></i>
-            The text contains PII information
+            Entered input contains PII information
           </div>
-          {% elif result == 'non-pii' and active_tab == 'text'%}
+          {% elif result == 'non-pii' and active_tab == 'generic'%}
           <div class="alert alert-success result" role="alert">
             <i class="bi bi-check-circle-fill"></i>
-            The text doesn't contain PII information
+            Entered input doesn't contain PII information
           </div>
           {% endif %}
         </div>
-        <div class="tab-pane fade {% if active_tab=='file' %}show active{% endif %}" id="file" role="tabpanel">
-          <form
+        <div
+          class="tab-pane fade {% if active_tab=='custom' %}show active{% endif %}"
+          id="custom"
+          role="tabpanel"
+        >
+          <form id="custom-file"
             method="post"
             action="/"
             enctype="multipart/form-data"
@@ -130,29 +179,45 @@
             novalidate
           >
             <div class="mb-3">
-              <label for="pii-file" class="form-label"
-                >Please upload file for PII Detection</label
+              <label for="custom-pii-file" class="form-label"
+                >Upload files with PII information</label
               >
               <input
                 type="file"
-                class="form-control"
-                id="pii-file"
-                name="pii-file"
+                class="form-control form-control-sm"
+                id="custom-pii-file"
+                name="custom-pii-file"
+                multiple
                 required
               />
               <div class="invalid-feedback">
-                Please upload a file for PII detection.
+                Please upload files with PII information
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="test-file" class="form-label"
+                >Upload file for PII Detection
+              </label>
+              <input
+                class="form-control form-control-sm mb-3"
+                type="file"
+                id="test-file"
+                name="test-file"
+                required
+              />
+              <div class="invalid-feedback">
+                Please upload a file for PII detection
               </div>
             </div>
             <button type="submit" class="btn btn-success">Detect PII</button>
           </form>
 
-          {% if result == 'pii' and active_tab == 'file'%}
+          {% if result == 'pii' and active_tab == 'custom'%}
           <div class="alert alert-danger result" role="alert">
             <i class="bi bi-exclamation-triangle-fill"></i>
             The text contains PII information
           </div>
-          {% elif result == 'non-pii' and active_tab == 'file'%}
+          {% elif result == 'non-pii' and active_tab == 'custom'%}
           <div class="alert alert-success result" role="alert">
             <i class="bi bi-check-circle-fill"></i>
             The text doesn't contain PII information
@@ -168,21 +233,92 @@
       crossorigin="anonymous"
     />
     <script>
-        (function () {
-          'use strict';
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.querySelectorAll('.needs-validation');
-          // Loop over them and prevent submission
-          Array.prototype.slice.call(forms).forEach(function (form) {
-            form.addEventListener('submit', function (event) {
+      (function () {
+        "use strict";
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll(".needs-validation");
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener(
+            "submit",
+            function (event) {
               if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
               }
-              form.classList.add('was-validated');
-            }, false);
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+
+        // Clears the input values when the accordion is closed
+        const accordionItems = document.querySelectorAll(".accordion-item");
+        accordionItems.forEach((item) => {
+          item.addEventListener("hidden.bs.collapse", () => {
+            const input = item.querySelector('textarea, input[type="file"]');
+            if (input) {
+              input.value = "";
+            }
           });
-        })();
+        });
+
+        // Displays error when the inputs in accordions are empty and form is submitted
+        const form = document.getElementById("generic-form");
+        const btn = document.getElementById("btn1");
+        const textInput = document.getElementById("generic-text");
+        const fileInput = document.getElementById("generic-file");
+        const feedback = document.querySelector(".invalid-feedback");
+        const accordion = document.getElementById("accordionExample");
+        const spinner = document.getElementById("spinner");
+
+        btn.addEventListener("click", (event) => {
+          if (textInput.value.trim() === "" && fileInput.value.trim() === "") {
+            event.preventDefault();
+            feedback.style.display = "block";
+            accordion.classList.add("is-empty");
+          }
+
+          // hide any alert messages that are currently visible
+          var alerts = document.querySelectorAll(".alert");
+          alerts.forEach(function (alert) {
+            alert.style.display = "none";
+          });
+
+          // Show the spinner
+          spinner.classList.remove("d-none");
+
+          // Disable the button to prevent multiple clicks
+          button.disabled = true;
+
+          // Make the API call
+          fetch("/", {
+            method: "POST",
+            body: new FormData(form),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Hide the spinner
+              spinner.classList.add("d-none");
+
+              // Enable the button
+              button.disabled = false;
+
+              // Handle the API response
+              // ...
+            })
+            .catch((error) => {
+              // Hide the spinner
+              spinner.classList.add("d-none");
+
+              // Enable the button
+              button.disabled = false;
+
+              // Handle the error
+              // ...
+            });
+        });
+      })();
     </script>
   </body>
 </html>
