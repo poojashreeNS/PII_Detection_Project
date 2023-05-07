@@ -146,11 +146,7 @@
               class="btn btn-success"
               value="Submit"
             >
-              <span
-                id="spinner"
-                class="spinner-border spinner-border-sm d-none me-2"
-              ></span
-              >Detect PII
+              Detect PII
             </button>
           </form>
 
@@ -171,7 +167,8 @@
           id="custom"
           role="tabpanel"
         >
-          <form id="custom-file"
+          <form
+            id="custom-form"
             method="post"
             action="/"
             enctype="multipart/form-data"
@@ -278,45 +275,6 @@
             feedback.style.display = "block";
             accordion.classList.add("is-empty");
           }
-
-          // hide any alert messages that are currently visible
-          var alerts = document.querySelectorAll(".alert");
-          alerts.forEach(function (alert) {
-            alert.style.display = "none";
-          });
-
-          // Show the spinner
-          spinner.classList.remove("d-none");
-
-          // Disable the button to prevent multiple clicks
-          button.disabled = true;
-
-          // Make the API call
-          fetch("/", {
-            method: "POST",
-            body: new FormData(form),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              // Hide the spinner
-              spinner.classList.add("d-none");
-
-              // Enable the button
-              button.disabled = false;
-
-              // Handle the API response
-              // ...
-            })
-            .catch((error) => {
-              // Hide the spinner
-              spinner.classList.add("d-none");
-
-              // Enable the button
-              button.disabled = false;
-
-              // Handle the error
-              // ...
-            });
         });
       })();
     </script>
