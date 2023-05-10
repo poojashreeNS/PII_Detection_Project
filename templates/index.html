@@ -185,11 +185,10 @@
                 id="custom-pii-file"
                 name="custom-pii-file"
                 multiple
-                required
               />
-              <div class="invalid-feedback">
-                Please upload files with PII information
-              </div>
+              {% if custom_error == True and active_tab == 'custom'%}
+              <strong class="error-msg">Please upload files with PII information</strong> 
+              {% endif %}
             </div>
             <div class="mb-3">
               <label for="test-file" class="form-label"
@@ -210,10 +209,18 @@
           </form>
 
           {% if result == 'pii' and active_tab == 'custom'%}
-          <div class="alert alert-danger result" role="alert">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            The text contains PII information
+          <div>
+            <div class="alert alert-danger result" role="alert">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              The text contains PII information
+            </div>
+            <div class="mb-3">
+              The test file with content <mark>{{test_input}}</mark> matches the
+              following custom PII file content with similarity score: {{score}}
+            </div>
+            <pre class="file-content"><code>{{matched}}</code></pre>
           </div>
+
           {% elif result == 'non-pii' and active_tab == 'custom'%}
           <div class="alert alert-success result" role="alert">
             <i class="bi bi-check-circle-fill"></i>
