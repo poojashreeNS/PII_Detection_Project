@@ -11,8 +11,8 @@ import ast
 
 app = Flask(__name__)
 
-openai_key = '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'
-ocrKey = 'K85726806988957'
+openai_key = 'XXXX'
+ocrKey = 'XXXX'
 model = OpenAI(api_key = openai_key)
 nlp_prompter = Piidetector(model)
 openai.api_key = openai_key
